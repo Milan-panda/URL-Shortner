@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+const cors = require('cors');
+
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -11,6 +13,7 @@ const URL = require("./src/models/url");
 
 //Middleware
 app.use(express.json());
+app.use(cors())
 
 //Database Connection
 const connectToDatabase = require("./src/config/database");
