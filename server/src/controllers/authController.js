@@ -7,10 +7,18 @@ async function signup(req, res) {
   const { name, username, email, password } = req.body;
 
   try {
-    let user = await User.findOne({ $or: [{ username }, { email }] });
-    if (user) {
-      return res.status(400).json({ error: 'User already exists' });
-    }
+    // let user_userName = await User.findOne({ $or: [{ username }, { email }] });
+    // if (user) {
+    //   return res.status(400).json({ error: 'User already exists' });
+    // }
+
+    let user_userName = await User.findOne({username})
+    if(user_userName) return res.status(400).json({error: 'User name already taken'});
+
+    let user_userEmail = await User.findOne({email})
+    if(user_userEmail) return res.status(400).json({error: 'Email already in use'});
+
+    let user;
 
     user = new User({
       name,
@@ -56,7 +64,7 @@ async function login(req, res) {
 
     jwt.sign(payload, jwtSecret, { expiresIn: jwtExpiration }, (err, token) => {
       if (err) throw err;
-      res.json({ token });
+      res.json({ token, message: 'Login Successful' });
     });
   } catch (error) {
     console.error(error);

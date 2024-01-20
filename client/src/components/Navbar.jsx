@@ -14,10 +14,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-white shadow-sm sticky top-0">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
-          daisyUI
+          ShortLink
         </Link>
       </div>
       <div className="flex-none">

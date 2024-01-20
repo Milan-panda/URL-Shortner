@@ -9,7 +9,6 @@ dotenv.config();
 const authRoutes = require("./src/routes/authRoutes");
 const authenticationMiddleware = require("./src/middleware/authentication");
 const urlRoutes = require("./src/routes/urlRoutes");
-const URL = require("./src/models/url");
 
 //Middleware
 app.use(express.json());
@@ -32,5 +31,5 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something went wrong!");
 });
 
-PORT = process.env.PORT || 8081;
-app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
+const port = process.env.PORT || 8081;
+app.listen(port, () => console.log(`Server is running on port: ${port}`));

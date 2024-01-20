@@ -7,31 +7,41 @@ import {
 
 import "./App.css";
 import HomePage from "./pages/HomePage";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import { useAuthContext } from "./hooks/useAuthContext";
-import Dashboard from "./pages/Dashboard";
+import { Suspense, lazy } from "react";
+import Loader from "./components/Loader";
+
+const Signup = lazy(()=>import('./pages/Signup'))
+const Login = lazy(()=>import('./pages/Login'))
+const Dashboard = lazy(()=>import('./pages/Dashboard'))
 
 function App() {
   const { user } = useAuthContext();
 
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route
-          path="/dashboard"
-          element={user ? <Dashboard /> : <Navigate to="/login" />}
-        />
-        <Route path="/register" element={!user ? <Signup /> : <Navigate to="/dashboard" />} />
-        <Route
-          path="/login"
-          element={!user ? <Login /> : <Navigate to="/dashboard" />}
-        />
-      </Routes>
-    </Router>
+    <div className="min-h-screen w-full bg-gray-50">
+      <Router>
+        <Navbar />
+        <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/dashboard"
+            element={user ? <Dashboard /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/register"
+            element={!user ? <Signup /> : <Navigate to="/dashboard" />}
+          />
+          <Route
+            path="/login"
+            element={!user ? <Login /> : <Navigate to="/dashboard" />}
+          />
+        </Routes>
+        </Suspense>
+      </Router>
+    </div>
   );
 }
 

@@ -6,7 +6,6 @@ export const useSignup = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { dispatch } = useAuthContext();
   const navigate = useNavigate();
 
   const signup = async (name, username, email, password) => {
@@ -15,7 +14,7 @@ export const useSignup = () => {
     setSuccessMessage(null);
 
     try {
-      const response = await fetch('http://localhost:8080/api/auth/signup', {
+      const response = await fetch(' /api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +36,7 @@ export const useSignup = () => {
         // Redirect the user to the login page
         setTimeout(() => {
           navigate('/login');
-        }, 2000);
+        }, 3000);
       } else {
         setIsLoading(false);
         setError(responseData.error || "Error during signup");

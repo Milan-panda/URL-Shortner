@@ -15,7 +15,7 @@ export const useLogin = () => {
     setSuccessMessage(null);
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
+      const response = await fetch(" /api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,20 +31,20 @@ export const useLogin = () => {
       if (response.ok) {
         // Optionally, you can handle the successful signup, e.g., dispatch a login action
         setSuccessMessage(responseData.message); // Set success message
-
-        // Dispatch the 'LOGIN' action with the user data (e.g., token)
-        dispatch({ type: "LOGIN", payload: responseData.token });
-
-        // Store the token in localStorage
-        localStorage.setItem("Authorization", responseData.token);
-
+        
         //Loading set to false
         setIsLoading(false);
-
+        
         // Redirect the user to the login page
-        setTimeout(() => {
+        
+        setTimeout(()=>{
           navigate("/dashboard");
-        }, 2000);
+          // Store the token in localStorage
+          localStorage.setItem("Authorization", responseData.token);
+          // Dispatch the 'LOGIN' action with the user data (e.g., token)
+          dispatch({ type: "LOGIN", payload: responseData.token });
+        }, 3000)
+
       } else {
         setIsLoading(false);
         setError(responseData.error || "Error during signup");

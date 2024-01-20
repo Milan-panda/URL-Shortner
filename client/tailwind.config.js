@@ -4,8 +4,15 @@ export default {
     "./src/**/*.{html, js, ts, vue}", 
     "./src/**/*"
 ],
+daisyui: {
+  themes: [],
+},
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        "border-rgba" : 'rgba(255, 255, 255, 0.37)',
+      },
+    },
   },
   plugins: [require("daisyui")],
 }
