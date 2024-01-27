@@ -34,6 +34,8 @@ const Navbar = () => {
           </div>
         )}
         {user && (
+          <>
+          <div>Dashboard</div>
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -54,7 +56,6 @@ const Navbar = () => {
               <li>
                 <Link className="justify-between">
                   Profile
-                  <span className="badge">New</span>
                 </Link>
               </li>
               <li>
@@ -62,6 +63,7 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
+          </>
         )}
       </div>
     </div>

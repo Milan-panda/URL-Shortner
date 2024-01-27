@@ -62,7 +62,7 @@ async function login(req, res) {
       },
     };
 
-    jwt.sign(payload, jwtSecret, { expiresIn: jwtExpiration }, (err, token) => {
+    jwt.sign(payload, jwtSecret, (err, token) => {
       if (err) throw err;
       res.json({ token, message: 'Login Successful' });
     });
